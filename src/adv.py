@@ -1,4 +1,6 @@
 from room import Room
+from player import Player
+
 
 # Declare all the rooms
 
@@ -49,3 +51,18 @@ room['treasure'].s_to = room['narrow']
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+
+def print_valid_commands():
+    print("""Valid commands:
+    \'n\', \'s\', \'e\', or \'w\'   move North, South, East, or West
+    \'take <item>\'           pickup an item, where <item> is the item name
+    \'drop <item>\'           drop an item, where <item> is the item name
+    \'i\' or \'inventory\'      view the items currently in your inventory
+    \'q\'                     quit\n""")
+
+
+possible_directions = ['n', 's', 'e', 'w']
+player = Player("Pravin", room["outside"])
+
+
+print_valid_commands()
