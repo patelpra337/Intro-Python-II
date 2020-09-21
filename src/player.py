@@ -2,17 +2,10 @@
 # currently.
 from room import Room
 
-direction_names = {
-    'n': 'North',
-    's': 'South',
-    'e': 'East',
-    'w': 'West'
-}
-
 class Player:
-    def __init__(self, name, current_room, inventory=[]):
+    def __init__(self, name, current_room, items = []):
         self.name = name
         self.current_room = current_room
-        self.inventory = inventory
+        self.items = items
     
 

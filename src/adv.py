@@ -52,17 +52,36 @@ room['treasure'].s_to = room['narrow']
 #
 # If the user enters "q", quit the game.
 
-def print_valid_commands():
-    print("""Valid commands:
-    \'n\', \'s\', \'e\', or \'w\'   move North, South, East, or West
-    \'take <item>\'           pickup an item, where <item> is the item name
-    \'drop <item>\'           drop an item, where <item> is the item name
-    \'i\' or \'inventory\'      view the items currently in your inventory
-    \'q\'                     quit\n""")
-
-
-possible_directions = ['n', 's', 'e', 'w']
+directions = {'n': 'north', 's': 'south', 'e': 'east', 'w': 'west'}
 player = Player("Pravin", room["outside"])
 
+actions = ['drop', 'get', 'drop']
 
-print_valid_commands()
+while True:
+	print(str(player.current_room))
+	result = input("Which way, Pravin? ")
+	choices = result.split()
+
+	if len(choices) == 1:
+		choice = choices[0]
+		if choice == 'q':
+			exit(0)
+		direction = directions[choice]
+		try:
+			player.current_room = getattr(player.current_room, direction)
+		except AttributeError:
+			print("Sorry, you can't go that way!")
+
+	elif len(choices) == 2:
+		action = choices[0]
+		if action in actions:
+			item = choices[1]
+			if item in player.current_room.items:
+				# The item is in the room, we can take it or leave it
+				print(f"The item: {item} is in this room.")
+			else:
+				print("Sorry, that item is not in this room!")
+		else:
+			print("Sorry, that action is not allowed!")
+	else:
+		print("You entered too many options, please be more specific!")
